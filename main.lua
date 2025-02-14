@@ -19,5 +19,5 @@ if success then
     StarterGui:SetCore("SendNotification", {Title = "Require Support", Text = "Your executor has require Support!"})
 else
     StarterGui:SetCore("SendNotification", {Title = "Require Support", Text = "Your executor has no require support."})
-  StarterGui:SetCore("SendNotification", {Title = "Require Support", Text = "Make sure to run it at least 3 times. If even one says 'Require Support' then it means there is support."})
+  StarterGui:SetCore("SendNotification", {Title = "Advice", Text = "Make sure to run it at least 3 times. If even one says 'Require Support' then it means there is support."})
 end
