@@ -1,23 +1,22 @@
-local StarterGui = game:GetService("StarterGui")
-
-local checkedmodules = {}
-for _, module in ipairs(game:GetDescendants()) do
-    if module:IsA("ModuleScript") then
-        table.insert(checkedmodules, module)
-    end
+local executor = getgenv().identifyexecutor and getgenv().identifyexecutor() or "RobloxClientApp"
+local function notify(message)
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Executor Check";
+		Text = message;
+		Duration = 5;
+	})
 end
 
-if #checkedmodules == 0 then
-    StarterGui:SetCore("SendNotification", {Title = "Uh oh..", Text = "Join another game, this one doesn't have any modules"})
-    return
-end
-
-local rm = checkedmodules[math.random(1, #checkedmodules)]
-
-local success, result = pcall(require, rm)
-if success then
-    StarterGui:SetCore("SendNotification", {Title = "Require Support", Text = "Your executor has require support!"})
+if pcall(function() return require end) then
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Executor Check";
+		Text = 'Your executor ('..executor..') supports require';
+		Duration = 5;
+	})
 else
-    StarterGui:SetCore("SendNotification", {Title = "Require Support", Text = "Your executor has no require support."})
-    StarterGui:SetCore("SendNotification", {Title = "Advice", Text = "Make sure to run it at least 3 times. If even one says 'Require Support' then it means there is support."})
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Executor Check";
+		Text = 'Your executor ('..executor..') does not supports require';
+		Duration = 5;
+	})
 end
